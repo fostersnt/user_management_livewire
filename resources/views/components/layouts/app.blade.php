@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>{{ $title ?? 'Page Title' }}</title>
+    <link rel="stylesheet" href="{{asset('assets/bootstrap/bootstrap.min.css')}}">
     <link href="https://cdn.datatables.net/2.1.7/css/dataTables.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/buttons/3.1.2/css/buttons.dataTables.min.css" rel="stylesheet">
     <script src="{{asset('assets/jquery/jquery.min.js')}}"></script>
