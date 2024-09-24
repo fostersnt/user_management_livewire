@@ -18,6 +18,6 @@ class User extends Component
     #[Title('Add User')]
     public function render()
     {
-        return view('livewire.user')->with(['title'=>$this->title]);
+        return view('livewire.user');
     }
 }
