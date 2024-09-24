@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::prefix('users')
+->group(function(){
+    Route::get('/', User::class)->name('users.name');
+});
 
 Route::get('/', function () {
     return view('welcome');
