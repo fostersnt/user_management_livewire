@@ -13,6 +13,14 @@
     </body>
 
     <div class="table p-3">
+        <div class="row">
+            @if (Session::has('error'))
+            <span class="text-danger">{{Session::get('error')}}</span>
+        @endif
+        @if (Session::has('success'))
+            <span class="text-success">{{Session::get('success')}}</span>
+        @endif
+        </div>
         <table id="users_table">
             <thead>
                 <th>Name</th>

@@ -10,6 +10,9 @@
         @if (Session::has('error'))
             <span class="text-danger">{{Session::get('error')}}</span>
         @endif
+        @if (Session::has('success'))
+            <span class="text-success">{{Session::get('success')}}</span>
+        @endif
     </div>
     <form wire:submit='save'>
         <div class="row mb-3">
