@@ -4,7 +4,7 @@
     <div class="d-flex">
         <button wire:click='increment' type="button" class="btn btn-primary">Add Mark</button>
         <nav>
-        <a href='/users/create' wire:navigate class="btn btn-primary">Create New User</a>
+            <a href='/users/create' wire:navigate class="btn btn-primary">Create New User</a>
         </nav>
     </div>
 
@@ -17,16 +17,16 @@
             <thead>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Email</th>
-                <th>Email</th>
             </thead>
             <tbody>
-                <r>
-                    <td>Foster Amponsah Asante</td>
-                    <td>fostersnt@gmail.com</td>
-                    <td>fostersnt@gmail.com</td>
-                    <td>fostersnt@gmail.com</td>
-                </r>
+                @if (count($users) > 0)
+                    @foreach ($users as $user)
+                        <tr>
+                            <td>{{$user->name}}</td>
+                            <td>{{$user->email}}</td>
+                        </tr>
+                    @endforeach
+                @endif
             </tbody>
         </table>
     </div>
