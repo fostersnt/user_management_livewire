@@ -44,6 +44,7 @@
 </div>
 
 @script
+
     <script>
         $(document).ready(function() {
            $('#users_table').DataTable({
