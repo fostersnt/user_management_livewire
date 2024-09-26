@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Login;
 use App\Livewire\User\EditUser;
 use App\Livewire\User\User;
 use App\Livewire\User\UserCreate;
@@ -23,6 +24,8 @@ Route::prefix('users')
         Route::get('/edit/{id}', UserCreate::class)->name('users.edit');
     });
 
+Route::get('login', Login::class)->name('page');
+
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('page');
 });
