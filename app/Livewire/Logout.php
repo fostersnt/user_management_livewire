@@ -6,10 +6,21 @@ use Livewire\Component;
 
 class Logout extends Component
 {
+    public bool $isLogout;
+
+    public function confirmLogout()
+    {
+        $this->isLogout = true;
+        $this->dispatch('logoutConfirmed');
+    }
+
     public function logout()
     {
-        auth()->logout();
-        return redirect()->route('login');
+        if ($this->isLogout) {
+            auth()->logout();
+        // $this->dispatch('logoutConfirmed');
+            return redirect()->route('login');
+        }
     }
 
     public function render()

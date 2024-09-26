@@ -2,7 +2,7 @@
     <div class="p-3">
         <div class="row p-3">
             <div class="m-4 d-flex justify-content-end">
-                <button class="btn btn-outline-info" id="add_user">Add User</a>
+                <button class="btn btn-outline-info" id="add_user"><i class="fa fa-plus text-info"></i> Add User</a>
             </div>
             @if (Session::has('error'))
                 <div class="alert alert-danger">
@@ -29,10 +29,10 @@
                             <td>{{ $user->email }}</td>
                             <td class="">
                                 <div class="d-flex justify-content-around">
-                                    <button type="button" class="btn btn-danger" id=""
-                                        wire:click='confirmDelete({{ $user->id }})'>Delete</button>
-                                    <button wire:click.prevent='edit({{ $user->id }})'
-                                        class="btn btn-info user_edit">Edit</button>
+                                    <a type="button" class="" id=""
+                                        wire:click='confirmDelete({{ $user->id }})'><i class="fa fa-trash text-danger"></i></a>
+                                    <a wire:click.prevent='edit({{ $user->id }})' type="button"
+                                        class="user_edit"><i class="fa fa-pencil text-info"></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -46,8 +46,8 @@
     <div class="modal" tabindex="-1" id="add_user_modal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="d-flex justify-content-center">
-                    <h5 class="modal-title text-muted">fa fa-create</h5>
+                <div class="d-flex justify-content-center mt-3">
+                    <i class="modal-title text-muted fa fa-plus"></i>
                     {{-- <button type="button" class="btn-close text-light" data-bs-dismiss="modal"
                         aria-label="Close"></button> --}}
                 </div>
@@ -90,30 +90,29 @@
     <div class="modal" tabindex="-1" id="user_edit_modal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="d-flex justify-content-center">
-                    <h5 class="modal-title text-muted">fa fa-pencil</h5>
+                <div class="d-flex justify-content-center mt-3">
+                    <i class="modal-title text-muted fa fa-pencil"></i>
                 </div>
                 <div class="modal-body">
                     <form wire:submit.prevent='update()'>
                         <div class="form-group mb-3">
                             <label for="">Name</label>
-                            <input class="form-control @error('name') error-border @enderror"
-                                wire:model='name' type="text" name="" id="">
+                            <input class="form-control @error('name') error-border @enderror" wire:model='name'
+                                type="text" name="" id="">
                             @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="form-group mb-3">
                             <label for="">Email</label>
-                            <input class="form-control @error('email') error-border @enderror"
-                                wire:model='email' type="text" name="" id="">
+                            <input class="form-control @error('email') error-border @enderror" wire:model='email'
+                                type="text" name="" id="">
                             @error('email')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="d-flex justify-content-end">
-                            <button type="button" class="btn btn-secondary mx-2"
-                                data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary mx-2" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary mx-2">Update</button>
                         </div>
                     </form>
@@ -125,13 +124,15 @@
     <div class="modal" tabindex="-1" id="delete_user_modal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="d-flex justify-content-center">
-                    <h5 class="modal-title text-muted">fa fa-delete</h5>
+                <div class="d-flex justify-content-center mt-3">
+                    <i class="modal-title text-muted fa fa-trash"></i>
                 </div>
                 <div class="modal-body">
                     <form wire:submit.prevent='delete()'>
-                        <span>Do you want to delete this user?</span>
-                        <div class="d-flex justify-content-end">
+                        <div class="d-flex justify-content-center">
+                            <span>Do you want to delete this user?</span>
+                        </div>
+                        <div class="d-flex justify-content-end mt-5">
                             <button type="button" class="btn btn-secondary mx-2"
                                 data-bs-dismiss="modal">CANCEL</button>
                             <button type="submit" class="btn btn-primary mx-2">YES</button>
@@ -147,7 +148,7 @@
 @script
     <script>
         $(document).ready(function() {
-            // $('#users_tabl').DataTable({
+            // $('#users_table').DataTable({
             //     dom: 'Bftip',
             //     buttons: [{
             //         extend: 'excel',
