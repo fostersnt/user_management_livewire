@@ -32,10 +32,35 @@
                                     <button wire:click='delete({{ $user->id }})'
                                         wire:confirm='Do you want to delete this user?' type="button"
                                         class="btn btn-danger">Delete</button>
-                                    <a href="{{route('users.edit', $user->id)}}" wire:navigate class="btn btn-info">Edit</a>
+                                    <button wire:click.prevent='edit({{ $user->id }})'
+                                        class="btn btn-info">Edit</button>
                                 </div>
                             </td>
                         </tr>
+                        {{-- EDIT MODAL --}}
+                        <div class="modal" tabindex="-1" id="user_edit_modal_{{$user->id}}">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Modal title</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="">
+                                            <label for="">Name</label>
+                                            <input class="form-control" wire:model='name' value="{{ $user->name }}"
+                                                type="text" name="" id="">
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     @endforeach
                 @endif
             </tbody>
@@ -43,11 +68,11 @@
     </div>
 </div>
 
-@script
 
+@script
     <script>
         $(document).ready(function() {
-           $('#users_table').DataTable({
+            $('#users_table').DataTable({
                 dom: 'Bftip',
                 buttons: [{
                     extend: 'excel',
@@ -56,12 +81,10 @@
                         columns: [0]
                     }
                 }, ]
-            })
-        });
-    </script>
-    <script>
-        // Listen for Livewire event after deletion
-        Livewire.on('userDeleted', () => {
+            });
+
+            // Listen for Livewire event after deletion
+            Livewire.on('userDeleted', () => {
                 //  alert('HELLO WORLD')
                 // Reload DataTable
                 // usersTable.ajax.reload(); // Use this if you're using AJAX
@@ -71,5 +94,12 @@
                 $('#users_table').DataTable().ajax.reload(); // Uncomment if needed
                 console.log('STEP TWO');
             });
+
+            Livewire.on('userEdit', (user_id) => {
+                console.log(`USER ID:${user_id}`);
+
+                $(`#user_edit_modal_${user_id}`).modal('show');
+            });
+        });
     </script>
 @endscript

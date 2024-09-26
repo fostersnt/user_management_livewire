@@ -11,7 +11,10 @@ use Livewire\Component;
 class User extends Component
 {
     public $score = 0;
-    public $title;// = 'Add User';
+    public $title; // = 'Add User';
+
+    public ModelsUser $currentUser;
+
     public ModelsUser $allUsers;
 
     public function increment()
@@ -19,27 +22,28 @@ class User extends Component
         $this->score++;
     }
 
-    public function logout()
+    public function edit($id)
     {
-        Auth::logout();
-        // dd('HELLO');
-        return redirect()->route('login');
+        $user = ModelsUser::query()->find($id);
+        $this->currentUser = $user;
+        // dd('heeeoo');
+        Log::info("\nUSER EDIT: $id");
+        $this->dispatch('userEdit', $id);
     }
 
     public function delete($id)
     {
         try {
             Log::info("\nUSER ID: $id");
-        $user = ModelsUser::query()->find($id);
-        // $flag = 0;
-        if ($user) {
-            $user->delete();
-            $this->dispatch('userDeleted');
-            return back()->with('success', "$user->name deleted successfully");
-        } else {
-            return back()->with('error', 'User cannot be found');
-        }
-
+            $user = ModelsUser::query()->find($id);
+            // $flag = 0;
+            if ($user) {
+                $user->delete();
+                $this->dispatch('userDeleted');
+                return back()->with('success', "$user->name deleted successfully");
+            } else {
+                return back()->with('error', 'User cannot be found');
+            }
         } catch (\Throwable $th) {
             Log::info("\nUSER DELETION: " . $th->getMessage());
             return redirect()->to('/users')->with('error', 'Failed to delete user');
@@ -51,5 +55,4 @@ class User extends Component
     {
         return view('livewire.user.index')->with(['users' => ModelsUser::query()->get()]);
     }
-
 }

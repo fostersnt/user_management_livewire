@@ -28,11 +28,11 @@ Route::middleware('auth')->group(function(){
     Route::prefix('users')
     ->group(function () {
         Route::get('/', User::class)->name('users.index');
-        Route::get('/create', UserCreate::class)->name('users.create');
         Route::get('/edit/{id}', UserCreate::class)->name('users.edit');
     });
 });
 
+Route::get('/create', UserCreate::class)->name('users.create');
 
 
 
