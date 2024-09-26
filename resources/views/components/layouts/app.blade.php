@@ -14,24 +14,24 @@
         Material Dashboard 2 by Creative Tim
     </title>
 
-    <script src="{{asset('assets/jquery/jquery.min.js')}}"></script>
+    <script src="{{ asset('assets/jquery/jquery.min.js') }}"></script>
 
     <!--     Fonts and icons     -->
     {{-- <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" /> --}}
-    <link rel="stylesheet" href="{{asset('assets/fonts/google-font.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/fonts/google-font.css') }}">
 
     <!-- Nucleo Icons -->
     <link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
-    <link rel="stylesheet" href="{{asset('assets/bootstrap/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/bootstrap/bootstrap.min.css') }}">
 
     <!-- Font Awesome Icons -->
     {{-- <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script> --}}
-    <script src="{{asset('assets/fonts/fontawesome.js')}}"></script>
+    <script src="{{ asset('assets/fonts/fontawesome.js') }}"></script>
 
     <!-- Material Icons -->
     {{-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"> --}}
-    <link rel="stylesheet" href="{{asset('assets/fonts/material-icons.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/fonts/material-icons.css') }}">
 
     <!-- CSS Files -->
 
@@ -46,24 +46,55 @@
     <!-- Nepcha Analytics (nepcha.com) -->
     <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
     {{-- <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script> --}}
-<style>
-    i{
-        /* font-size: 25px !important; */
-    }
-    .error-border{
+    <style>
+        .toastify .toastify-avatar {
+            width: 50px;
+            height: 40px;
+            margin-right: 10px;
+            /* border-radius: 50%; */
+        }
+        .toastify .toast-close {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            background-color: #056e13;
+            font-size: 20px;
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin-top: -20px;
+            margin-right: -10px;
+            padding: 5px;
+            cursor: pointer;
+            outline: none;
+            border: none;
+            border-radius: 50px;
+        }
+
+        .toastify .toast-close:hover {
+            background-color: #f00b0b;
+        }
+
+        .error-border {
             border: 1px solid red !important;
         }
-    .modal-content{
-        background-color: #3b3b42 !important;
-        border-radius: 0px !important;
-    }
-    .modal-content label{
-        color: #fff !important;
-    }
-    .form-control:focus{
-        background-color: #fff !important;
-    }
-</style>
+
+        .modal-content {
+            background-color: #3b3b42 !important;
+            border-radius: 0px !important;
+        }
+
+        .modal-content label {
+            color: #fff !important;
+        }
+
+        .form-control:focus {
+            background-color: #fff !important;
+        }
+    </style>
     @livewireStyles
 
 </head>
@@ -213,9 +244,11 @@
             </div>
         </nav>
         <!-- End Navbar -->
-
-        <div class="container-fluid py-4">
-            {{$slot}}
+        <div class="row px-4">
+            <div class="d-flex justify-content-end"><span id="alert_message"></span></div>
+        </div>
+        <div class="container-fluid">
+            {{ $slot }}
         </div>
         {{-- FOOTER --}}
         <div style="position: absolute; bottom: 0;">
@@ -257,6 +290,9 @@
 <script src="{{ asset('assets/datatables/js/jszip.min.js') }}"></script>
 <script src="{{ asset('assets/datatables/js/vfs_fonts.js') }}"></script>
 <script src="{{ asset('assets/datatables/js/pdfmake.min.js') }}"></script>
+
+{{-- Toastify js --}}
+<script src="{{ asset('assets/js/toastify-js.js') }}"></script>
 
 {{-- OLD --}}
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
