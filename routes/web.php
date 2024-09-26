@@ -2,9 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Livewire\Login;
-use App\Livewire\User\EditUser;
 use App\Livewire\User\User;
-use App\Livewire\User\UserCreate;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,15 +22,13 @@ Route::get('login', Login::class)->name('login')->middleware('guest');
 
 
 // AUTH ROUTES
-Route::middleware('auth')->group(function(){
+Route::middleware('auth')->group(function () {
     Route::prefix('users')
-    ->group(function () {
-        Route::get('/', User::class)->name('users.index');
-        Route::get('/edit/{id}', UserCreate::class)->name('users.edit');
-    });
+        ->group(function () {
+            Route::get('/', User::class)->name('users.index');
+        });
 });
 
-Route::get('/create', UserCreate::class)->name('users.create');
 
 
 

@@ -10,35 +10,64 @@ use Livewire\Component;
 
 class User extends Component
 {
-    public $score = 0;
-    public $title; // = 'Add User';
-
     public $name;
     public $email;
-    public $userId;
+    public $password;
+    public $userIdToDelete;
+    public $userIdToEdit;
+    public ModelsUser $allUsers;
 
+    // public $users;
 
-    public function increment()
+    // public $userId;
+
+    public function mount()
     {
-        $this->score++;
+        // $this->allUsers = ModelsUser::query()->where('email', '<>', auth()->user()->email)->orderBy('created_at', 'desc')->get();
     }
 
-    public function edit($id)
+    public function refreshUsers()
+    {
+        // $this->users = ModelsUser::query()->where('email', '<>', auth()->user()->email)->orderBy('created_at', 'desc')->get();
+    }
+
+    public function create()
+    {
+        $validator = $this->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
+        $user = ModelsUser::query()->create([
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => bcrypt($this->password),
+        ]);
+
+        $this->reset();
+
+        $this->dispatch('userCreated');
+
+        return back()->with('success', 'User created successfully');
+    }
+
+    public function edit($user_id)
     {
         // $validator = $this->validate([
         //     'name' => 'required',
         //     'email' => 'required',
         // ]);
 
-        $user = ModelsUser::query()->find($id);
+        $user = ModelsUser::query()->find($user_id);
 
         if ($user) {
-            $this->userId = $id;
-        $this->name = $user->name;
-        $this->email = $user->email;
+            $this->userIdToEdit = $user->id;
+            $this->name = $user->name;
+            $this->email = $user->email;
         }
 
-        $this->dispatch('userEdit', $id);
+        $this->dispatch('userEdit');
     }
 
     public function update()
@@ -48,27 +77,47 @@ class User extends Component
             'email' => 'required',
         ]);
 
-        $user = ModelsUser::query()->find($this->userId);
+        $user = ModelsUser::query()->find($this->userIdToEdit);
+
         $user->update($validator);
+
         Log::info("\nUSER DATA: " . json_encode($user));
 
-        $this->dispatch('userUpdated', $this->userId);
+        $this->reset();
+
+        $this->dispatch('userUpdated');
+
         return back()->with('success', 'User updated successfully');
-
-
     }
 
-    public function delete($id)
+    public function confirmDelete($user_id)
+    {
+        $user = ModelsUser::query()->find($user_id);
+        if ($user) {
+            $this->userIdToDelete = $user->id;
+        }
+        $this->dispatch('userDeleteConfirmed');
+    }
+
+    public function delete()
     {
         try {
-            Log::info("\nUSER ID: $id");
-            $user = ModelsUser::query()->find($id);
-            // $flag = 0;
+
+            $user = ModelsUser::query()->find($this->userIdToDelete);
+
             if ($user) {
+
                 $user->delete();
+
+                $this->userIdToDelete = null;
+
                 $this->dispatch('userDeleted');
-                return back()->with('success', "$user->name deleted successfully");
+
+                return back()->with('success', "user deleted successfully");
             } else {
+                $this->reset();
+                $this->dispatch('userDeleteFailed');
+
                 return back()->with('error', 'User cannot be found');
             }
         } catch (\Throwable $th) {
@@ -80,6 +129,8 @@ class User extends Component
     #[Title('Add User')]
     public function render()
     {
-        return view('livewire.user.index')->with(['users' => ModelsUser::query()->get()]);
+        $users = ModelsUser::query()->where('email', '<>', auth()->user()->email)->orderBy('created_at', 'desc')->get();
+        return view('livewire.user.index', compact('users'));
+        // return view('livewire.user.index')->with(['users' => ModelsUser::query()->get()]);
     }
 }

@@ -21,8 +21,6 @@ class Login extends Component
 
         try {
             if (Auth::attempt($validator)) {
-                // Auth::login(auth()->user());
-                // dd('Login success');
                 return redirect()->route('users.index');
             } else {
                 return back()->with('error', 'Your credentials do not match any record');
