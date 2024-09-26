@@ -17,18 +17,19 @@ class User extends Component
     public $userIdToEdit;
     public ModelsUser $allUsers;
 
-    // public $users;
+    public $users;
 
     // public $userId;
 
     public function mount()
     {
-        // $this->allUsers = ModelsUser::query()->where('email', '<>', auth()->user()->email)->orderBy('created_at', 'desc')->get();
+        $this->refreshUsers();
+        // $this->users = ModelsUser::query()->where('email', '<>', auth()->user()->email)->orderBy('created_at', 'desc')->get();
     }
 
     public function refreshUsers()
     {
-        // $this->users = ModelsUser::query()->where('email', '<>', auth()->user()->email)->orderBy('created_at', 'desc')->get();
+        $this->users = ModelsUser::query()->where('email', '<>', auth()->user()->email)->orderBy('created_at', 'desc')->get();
     }
 
     public function create()
@@ -46,6 +47,7 @@ class User extends Component
         ]);
 
         $this->reset();
+        $this->refreshUsers();
 
         $this->dispatch('userCreated');
 
@@ -84,6 +86,7 @@ class User extends Component
         Log::info("\nUSER DATA: " . json_encode($user));
 
         $this->reset();
+        $this->refreshUsers();
 
         $this->dispatch('userUpdated');
 
@@ -109,7 +112,8 @@ class User extends Component
 
                 $user->delete();
 
-                $this->userIdToDelete = null;
+                $this->reset();
+                $this->refreshUsers();
 
                 $this->dispatch('userDeleted');
 
@@ -129,8 +133,8 @@ class User extends Component
     #[Title('Add User')]
     public function render()
     {
-        $users = ModelsUser::query()->where('email', '<>', auth()->user()->email)->orderBy('created_at', 'desc')->get();
-        return view('livewire.user.index', compact('users'));
+        // $users = ModelsUser::query()->where('email', '<>', auth()->user()->email)->orderBy('created_at', 'desc')->get();
+        return view('livewire.user.index');
         // return view('livewire.user.index')->with(['users' => ModelsUser::query()->get()]);
     }
 }
