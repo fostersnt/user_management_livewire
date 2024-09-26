@@ -3,6 +3,7 @@
 namespace App\Livewire\User;
 
 use App\Models\User as ModelsUser;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -16,6 +17,13 @@ class User extends Component
     public function increment()
     {
         $this->score++;
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        // dd('HELLO');
+        return redirect()->route('login');
     }
 
     public function delete($id)

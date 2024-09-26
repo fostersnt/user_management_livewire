@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Livewire\Login;
 use App\Livewire\User\EditUser;
 use App\Livewire\User\User;
@@ -17,15 +18,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('users')
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('login', Login::class)->name('login')->middleware('guest');
+
+
+// AUTH ROUTES
+Route::middleware('auth')->group(function(){
+    Route::prefix('users')
     ->group(function () {
         Route::get('/', User::class)->name('users.index');
         Route::get('/create', UserCreate::class)->name('users.create');
         Route::get('/edit/{id}', UserCreate::class)->name('users.edit');
     });
+});
 
-Route::get('login', Login::class)->name('page');
+
+
 
 Route::get('/', function () {
-    return redirect()->route('page');
+    return redirect()->route('login');
 });

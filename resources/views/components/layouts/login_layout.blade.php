@@ -81,6 +81,10 @@
             background-color: #0056b3;
         }
 
+        .error-border{
+            border: 1px solid red !important;
+        }
+
         /* Responsive Styles */
         @media (min-width: 768px) {
             .image-column {

@@ -25,7 +25,13 @@ class UserCreate extends Component
         // Log::info("\WORLD");
         $username = $this->name;
         try {
-            User::query()->create($this->pull());
+            User::query()->create([
+                'email' => $this->email,
+                'name' => $this->name,
+                'password' => bcrypt($this->password),
+            ]);
+
+            $this->reset();
 
             // return redirect()->to('/users');
             return redirect()->route('users.index')->with('success', "Account for $username has been created successfully");
