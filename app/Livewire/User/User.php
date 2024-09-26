@@ -13,9 +13,10 @@ class User extends Component
     public $score = 0;
     public $title; // = 'Add User';
 
-    public ModelsUser $currentUser;
+    public $name;
+    public $email;
+    public $userId;
 
-    public ModelsUser $allUsers;
 
     public function increment()
     {
@@ -24,11 +25,37 @@ class User extends Component
 
     public function edit($id)
     {
+        // $validator = $this->validate([
+        //     'name' => 'required',
+        //     'email' => 'required',
+        // ]);
+
         $user = ModelsUser::query()->find($id);
-        $this->currentUser = $user;
-        // dd('heeeoo');
-        Log::info("\nUSER EDIT: $id");
+
+        if ($user) {
+            $this->userId = $id;
+        $this->name = $user->name;
+        $this->email = $user->email;
+        }
+
         $this->dispatch('userEdit', $id);
+    }
+
+    public function update()
+    {
+        $validator = $this->validate([
+            'name' => 'required',
+            'email' => 'required',
+        ]);
+
+        $user = ModelsUser::query()->find($this->userId);
+        $user->update($validator);
+        Log::info("\nUSER DATA: " . json_encode($user));
+
+        $this->dispatch('userUpdated', $this->userId);
+        return back()->with('success', 'User updated successfully');
+
+
     }
 
     public function delete($id)

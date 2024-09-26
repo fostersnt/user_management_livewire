@@ -17,18 +17,18 @@
     <script src="{{asset('assets/jquery/jquery.min.js')}}"></script>
 
     <!--     Fonts and icons     -->
-    <link rel="stylesheet" type="text/css"
-        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+    {{-- <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" /> --}}
 
     <!-- Nucleo Icons -->
     <link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{asset('assets/bootstrap/bootstrap.min.css')}}">
 
     <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    {{-- <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script> --}}
 
     <!-- Material Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    {{-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"> --}}
 
     <!-- CSS Files -->
 
@@ -42,8 +42,21 @@
 
     <!-- Nepcha Analytics (nepcha.com) -->
     <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
-    <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
-
+    {{-- <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script> --}}
+<style>
+    .error-border{
+            border: 1px solid red !important;
+        }
+    .modal-content{
+        background-color: #3b3b42 !important;
+    }
+    .modal-content label{
+        color: #fff !important;
+    }
+    .form-control:focus{
+        background-color: #fff !important;
+    }
+</style>
     @livewireStyles
 
 </head>
@@ -219,7 +232,7 @@
     </script>
 
     <!-- Github buttons -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    {{-- <script async defer src="https://buttons.github.io/buttons.js"></script> --}}
 
 
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->

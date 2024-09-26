@@ -38,25 +38,32 @@
                             </td>
                         </tr>
                         {{-- EDIT MODAL --}}
-                        <div class="modal" tabindex="-1" id="user_edit_modal_{{$user->id}}">
-                            <div class="modal-dialog">
+                        <div class="modal" tabindex="-1" id="user_edit_modal_{{ $user->id }}">
+                            <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Modal title</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
+                                    <div class="d-flex justify-content-center">
+                                        <h5 class="modal-title text-muted">fa fa-pencil</h5>
+                                        {{-- <button type="button" class="btn-close text-light" data-bs-dismiss="modal"
+                                            aria-label="Close"></button> --}}
                                     </div>
                                     <div class="modal-body">
-                                        <form action="">
-                                            <label for="">Name</label>
-                                            <input class="form-control" wire:model='name' value="{{ $user->name }}"
-                                                type="text" name="" id="">
+                                        <form wire:submit.prevent='update'>
+                                            <div class="form-group mb-3">
+                                                <label for="">Name</label>
+                                                <input class="form-control @error('name') error-border @enderror" wire:model='name' type="text" name="" id="">
+                                                @error('name') <span class="text-danger">{{$message}}</span> @enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">Email</label>
+                                                <input class="form-control @error('email') error-border @enderror" wire:model='email' type="text" name="" id="">
+                                                @error('email') <span class="text-danger">{{$message}}</span> @enderror
+                                            </div>
+                                            <div class="d-flex justify-content-end">
+                                                <button type="button" class="btn btn-secondary mx-2"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary mx-2">Update</button>
+                                            </div>
                                         </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
                                     </div>
                                 </div>
                             </div>
@@ -99,6 +106,11 @@
                 console.log(`USER ID:${user_id}`);
 
                 $(`#user_edit_modal_${user_id}`).modal('show');
+            });
+            Livewire.on('userUpdated', (user_id) => {
+                console.log(`USER ID:${user_id}`);
+
+                $(`#user_edit_modal_${user_id}`).modal('hide');
             });
         });
     </script>

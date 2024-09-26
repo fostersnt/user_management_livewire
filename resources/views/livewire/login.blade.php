@@ -6,6 +6,11 @@
         <div class="form-column">
             <h2>Login</h2>
             <form wire:submit='login'>
+                <div class="mt-2 mb-2 d-flex justify-content-center">
+                    @if (Session::has('error'))
+                        <span class="text-danger">{{Session::get('error')}}</span>
+                    @endif
+                </div>
                 <div class="form-group">
                     <label for="email">Email:</label>
                     <input wire:model='email' class="form-control @error('email') error-border @enderror" type="email" id="email" name="email">
