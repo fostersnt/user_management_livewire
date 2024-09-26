@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\User\EditUser;
 use App\Livewire\User\User;
 use App\Livewire\User\UserCreate;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,7 @@ Route::prefix('users')
     ->group(function () {
         Route::get('/', User::class)->name('users.index');
         Route::get('/create', UserCreate::class)->name('users.create');
+        Route::get('/edit/{id}', UserCreate::class)->name('users.edit');
     });
 
 Route::get('/', function () {

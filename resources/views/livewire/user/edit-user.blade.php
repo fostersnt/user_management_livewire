@@ -18,7 +18,7 @@
         <div class="row mb-3">
             <div class="col-md-6">
                 <label for="">Name</label>
-                <input wire:model='name' name="name" class="form-control @error('name')
+                <input wire:model='name' name="name" value="{{$user->name}}" class="form-control @error('name')
                     error_border
                 @enderror" type="text">
                 @error('name')

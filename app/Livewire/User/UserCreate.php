@@ -35,6 +35,16 @@ class UserCreate extends Component
         }
     }
 
+    public function edit($id)
+    {
+        $user = User::query()->find($id);
+
+        $this->name = $user->name;
+        $this->email = $user->email;
+        $this->password = $user->password;
+        return view('livewire.user.edit-user', compact('user'));
+    }
+
     public function render()
     {
         return view('livewire.user.user-create');
