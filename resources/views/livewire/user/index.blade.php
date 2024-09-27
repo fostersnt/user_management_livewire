@@ -184,7 +184,7 @@
             Livewire.on('userUpdated', (user_id) => {
                 $('#user_edit_modal').modal('hide');
                 // let data = {alertType: 'success', actionType: 'update'};
-                Livewire.dispatch('show-alert', {gggg: 'CAT'});
+                Livewire.dispatch('showAlert', {alertType: 'success', actionType: 'update'});
             });
 
             Livewire.on('userDeleteConfirmed', () => {

@@ -23,9 +23,9 @@ class User extends Component
     public $alert_message = '';
     public $isAlert = false;
     public $isError = true;
-    protected $listeners = ['show-alert' => 'displayAlert'];
+    protected $listeners = ['showAlert' => 'displayAlert'];
 
-    #[On('show-alert')]
+    #[On('showAlert')]
     public function displayAlert($alertType, $actionType)
     {
         Log::info("\nALERT TYPE: " . json_encode($alertType));
