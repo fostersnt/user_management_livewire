@@ -8,7 +8,9 @@
                     <button wire:click="previousPage" wire:loading.attr="disabled" rel="prev">Previous</button>
                 @endif
             </span>
-
+                @for ($i = 1; $i <= $paginator->lastPage(); $i++)
+                <button wire:click="gotoPage({{ $i }})">{{ $i }}</button>
+                @endfor
             <span>
                 @if ($paginator->onLastPage())
                     <span>Next</span>
@@ -20,4 +22,4 @@
     @endif
 </div>
 
-<h1>{{$paginator->lastPage()}}</h1>
+{{-- <h1>{{$paginator->lastPage()}}</h1> --}}
