@@ -19,3 +19,5 @@
         </nav>
     @endif
 </div>
+
+<h1>{{$paginator->lastPage()}}</h1>
