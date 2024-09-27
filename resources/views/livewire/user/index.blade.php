@@ -146,7 +146,7 @@
 </div>
 
 
-@script
+{{-- @script --}}
     <script>
         $(document).ready(function() {
             // $('#users_table').DataTable({
@@ -158,15 +158,6 @@
             //             columns: [0]
             //         }
             //     }, ]
-            // });
-
-            // Listen for Livewire event after deletion
-            // Livewire.on('userDeleted', () => {
-            //     // usersTable.ajax.reload();
-            //     console.log('STEP ONE');
-            //     // usersTable.destroy();
-            //     $('#users_table').DataTable().ajax.reload(); // Uncomment if needed
-            //     console.log('STEP TWO');
             // });
 
             $('#add_user').click(function() {
@@ -197,4 +188,4 @@
             });
         });
     </script>
-@endscript
+{{-- @endscript --}}
