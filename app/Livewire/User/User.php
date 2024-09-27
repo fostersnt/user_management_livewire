@@ -8,9 +8,12 @@ use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class User extends Component
 {
+    use WithPagination;
+
     public $name;
     public $email;
     public $password;
@@ -18,29 +21,17 @@ class User extends Component
     public $userIdToEdit;
     public ModelsUser $allUsers;
 
-    public $users;
-
-    public $alert_message = '';
-    public $isAlert = false;
-    public $isError = true;
-    protected $listeners = ['showAlert' => 'displayAlert'];
-
-    #[On('showAlert')]
-    public function displayAlert($alertType, $actionType)
-    {
-        Log::info("\nALERT TYPE: " . json_encode($alertType));
-        Log::info("\nACTION TYPE: " . json_encode($actionType));
-    }
+    // public $users;
 
     public function mount()
     {
-        $this->refreshUsers();
+        // $this->refreshUsers();
         // $this->users = ModelsUser::query()->where('email', '<>', auth()->user()->email)->orderBy('created_at', 'desc')->get();
     }
 
     public function refreshUsers()
     {
-        $this->users = ModelsUser::query()->where('email', '<>', auth()->user()->email)->orderBy('created_at', 'desc')->get();
+        // $this->users = ModelsUser::query()->where('email', '<>', auth()->user()->email)->orderBy('created_at', 'desc')->get();
     }
 
     public function create()
@@ -58,7 +49,7 @@ class User extends Component
         ]);
 
         $this->reset();
-        $this->refreshUsers();
+        // $this->refreshUsers();
 
         $this->dispatch('userCreated');
 
@@ -97,7 +88,7 @@ class User extends Component
         Log::info("\nUSER DATA: " . json_encode($user));
 
         $this->reset();
-        $this->refreshUsers();
+        // $this->refreshUsers();
 
         $this->dispatch('userUpdated');
 
@@ -124,7 +115,7 @@ class User extends Component
                 $user->delete();
 
                 $this->reset();
-                $this->refreshUsers();
+                // $this->refreshUsers();
 
                 $this->dispatch('userDeleted');
 
@@ -144,8 +135,8 @@ class User extends Component
     #[Title('Add User')]
     public function render()
     {
-        // $users = ModelsUser::query()->where('email', '<>', auth()->user()->email)->orderBy('created_at', 'desc')->get();
-        return view('livewire.user.index');
+        $users = ModelsUser::query()->where('email', '<>', auth()->user()->email)->orderBy('created_at', 'desc')->paginate(10);
+        return view('livewire.user.index', compact('users'));
         // return view('livewire.user.index')->with(['users' => ModelsUser::query()->get()]);
     }
 }

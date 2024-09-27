@@ -19,6 +19,7 @@
             <thead>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Created At</th>
                 <th class="text-center">Actions</th>
             </thead>
             <tbody>
@@ -27,6 +28,7 @@
                         <tr key='{{ $user->id }}'>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
+                            <td>{{ $user->created_at }}</td>
                             <td class="">
                                 <div class="d-flex justify-content-around">
                                     <a type="button" class="" id=""
@@ -143,10 +145,11 @@
             </div>
         </div>
     </div>
+    {{ $users->links('pagination.users-pagination') }}
 </div>
 
 
-{{-- @script --}}
+@script
     <script>
         $(document).ready(function() {
             // $('#users_table').DataTable({
@@ -158,6 +161,15 @@
             //             columns: [0]
             //         }
             //     }, ]
+            // });
+
+            // Listen for Livewire event after deletion
+            // Livewire.on('userDeleted', () => {
+            //     // usersTable.ajax.reload();
+            //     console.log('STEP ONE');
+            //     // usersTable.destroy();
+            //     $('#users_table').DataTable().ajax.reload(); // Uncomment if needed
+            //     console.log('STEP TWO');
             // });
 
             $('#add_user').click(function() {
@@ -174,8 +186,26 @@
 
             Livewire.on('userUpdated', (user_id) => {
                 $('#user_edit_modal').modal('hide');
-                // let data = {alertType: 'success', actionType: 'update'};
-                Livewire.dispatch('showAlert', {alertType: 'success', actionType: 'update'});
+                Toastify({
+                    text: "User updated successfully",
+                    className: "info",
+                    // newWindow: true,
+                    selector: 'alert_message',
+                    duration: 3000,
+                    close: true,
+                    avatar: "{{ asset('assets/img/icons/update-icon.jpeg') }}",
+                    gravity: "bottom", // `top` or `bottom`
+                    position: "right", // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: {
+                        border: '1px solid black',
+                        // borderTopLeftRadius: '50px',
+                        // borderBottomRightRadius: '50px',
+                        color: 'green',
+                        // background: "linear-gradient(to right, #00b09b, #96c93d)",
+                        padding: '10px',
+                    }
+                }).showToast();
             });
 
             Livewire.on('userDeleteConfirmed', () => {
@@ -188,4 +218,4 @@
             });
         });
     </script>
-{{-- @endscript --}}
+@endscript
