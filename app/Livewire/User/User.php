@@ -5,6 +5,7 @@ namespace App\Livewire\User;
 use App\Models\User as ModelsUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -19,7 +20,48 @@ class User extends Component
 
     public $users;
 
-    // public $userId;
+    public $alert_message = '';
+    public $isAlert = false;
+    public $isError = true;
+    protected $listeners = ['show-alert' => 'displayAlert'];
+
+    #[On('show-alert')]
+    public function displayAlert($alertType, $actionType)
+    {
+        Log::info("\nALERT TYPE: " . json_encode($alertType));
+        Log::info("\nACTION TYPE: " . json_encode($actionType));
+        // session()->flash('message', $message);
+
+        $lower_alert_type = strtolower($alertType);
+        $lower_action_type = strtolower($actionType);
+
+        //User update alerts
+        if ($lower_alert_type == 'success' && $lower_action_type == 'update') {
+            $this->isAlert = true;
+            $this->alert_message = 'User updated successfully';
+        } elseif ($lower_alert_type == 'failed' && $lower_action_type == 'update') {
+            $this->isAlert = true;
+            $this->alert_message = 'User updated failed';
+        }
+        //User creation alerts
+        elseif ($lower_alert_type == 'success' && $lower_action_type == 'create') {
+            $this->isAlert = true;
+            $this->alert_message = 'User created successfully';
+        } elseif ($lower_alert_type == 'failed' && $lower_action_type == 'create') {
+            $this->isAlert = true;
+            $this->alert_message = 'User creation failed';
+        }
+        //User deletion alerts
+        elseif ($lower_alert_type == 'success' && $lower_action_type == 'delete') {
+            $this->isAlert = true;
+            $this->alert_message = 'User delete successfully';
+        } elseif ($lower_alert_type == 'failed' && $lower_action_type == 'delete') {
+            $this->isAlert = true;
+            $this->alert_message = 'User deletion failed';
+        } else {
+            # code...
+        }
+    }
 
     public function mount()
     {

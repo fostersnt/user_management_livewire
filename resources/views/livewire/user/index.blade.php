@@ -183,26 +183,11 @@
 
             Livewire.on('userUpdated', (user_id) => {
                 $('#user_edit_modal').modal('hide');
-                Toastify({
-                    text: "User updated successfully",
-                    className: "info",
-                    // newWindow: true,
-                    selector: 'alert_message',
-                    duration: 3000,
-                    close: true,
-                    avatar: "{{ asset('assets/img/icons/update-icon.jpeg') }}",
-                    gravity: "top", // `top` or `bottom`
-                    position: "right", // `left`, `center` or `right`
-                    stopOnFocus: true, // Prevents dismissing of toast on hover
-                    style: {
-                        border: '1px solid black',
-                        // borderTopLeftRadius: '50px',
-                        // borderBottomRightRadius: '50px',
-                        color: 'green',
-                        // background: "linear-gradient(to right, #00b09b, #96c93d)",
-                        padding: '10px',
-                    }
-                }).showToast();
+                // let data = {alertType: 'success', actionType: 'update'};
+                Livewire.dispatch('show-alert', {
+                    alertType: 'success',
+                    actionType: 'update'
+                });
             });
 
             Livewire.on('userDeleteConfirmed', () => {

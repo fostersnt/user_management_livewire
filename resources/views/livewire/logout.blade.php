@@ -33,10 +33,10 @@
     </div>
 </li>
 
-<script>
-    $(document).ready(function() {
+@script
+    <script>
         Livewire.on('logoutConfirmed', () => {
             $('#logout_modal').modal('show');
         });
-    })
-</script>
+    </script>
+@endscript
