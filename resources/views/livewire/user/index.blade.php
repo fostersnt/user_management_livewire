@@ -15,7 +15,7 @@
                 </div>
             @endif
         </div>
-        <table id="users_table" class="table table-responsive">
+        <table id="users_table" class="table table-responsive table-bordered table-striped">
             <thead>
                 <th>Name</th>
                 <th>Email</th>
