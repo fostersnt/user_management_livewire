@@ -245,11 +245,11 @@
         <div class="row px-4">
             <div class="d-flex justify-content-end"><span id="alert_message"></span></div>
         </div>
-        <div class="container-fluid">
+        <div class="container-fluid" style="background-color: #fff; min-height: 90vh;">
             {{ $slot }}
         </div>
         {{-- FOOTER --}}
-        <div style="position: absolute; bottom: 0;">
+        <div style="">
             @include('components.layouts.partials.footer')
         </div>
     </main>
