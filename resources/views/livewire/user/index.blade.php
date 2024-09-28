@@ -116,7 +116,12 @@
                         </div>
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-secondary mx-2" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary mx-2">Update</button>
+                            <button type="submit" class="btn btn-primary mx-2">
+                                Update
+                                @if ($isLoading)
+                                    <div class="spinner-grow" role="status"></div>
+                                @endif
+                            </button>
                         </div>
                     </form>
                 </div>

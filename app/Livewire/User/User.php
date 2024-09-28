@@ -20,6 +20,7 @@ class User extends Component
     public $userIdToDelete;
     public $userIdToEdit;
     public ModelsUser $allUsers;
+    public $isLoading = false;
 
     // public $users;
 
@@ -76,6 +77,7 @@ class User extends Component
 
     public function update()
     {
+
         $validator = $this->validate([
             'name' => 'required',
             'email' => 'required',
