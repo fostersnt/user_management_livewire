@@ -97,30 +97,27 @@
                     <i class="modal-title text-muted fa fa-pencil"></i>
                 </div>
                 <div class="modal-body">
+                    @if (Session::has('error'))
+                        <span class="text-danger">{{Session::get('error')}}</span>
+                    @endif
                     <form wire:submit.prevent='update()'>
                         <div class="form-group mb-3">
                             <label for="">Name</label>
-                            <input class="form-control @error('name') error-border @enderror" wire:model='name'
+                            <input class="form-control {{Session::has('errors') && Session::get('errors')->first('name') != '' ? 'error-border' : ''}}" wire:model='name'
                                 type="text" name="" id="">
-                            @error('name')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
+                            <span class="text-danger">{{Session::has('errors') ? Session::get('errors')->first('name') : ''}}</span>
                         </div>
                         <div class="form-group mb-3">
                             <label for="">Email</label>
-                            <input class="form-control @error('email') error-border @enderror" wire:model='email'
+                            <input class="form-control {{Session::has('errors') && Session::get('errors')->first('email') != '' ? 'error-border' : ''}}" wire:model='email'
                                 type="text" name="" id="">
-                            @error('email')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
+                                <span class="text-danger">{{Session::has('errors') ? Session::get('errors')->first('email') : ''}}</span>
                         </div>
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-secondary mx-2" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary mx-2">
-                                Update
-                                @if ($isLoading)
-                                    <div class="spinner-grow" role="status"></div>
-                                @endif
+                                <span wire:loading.remove>Update</span>
+                                    <div wire:loading class="spinner-grow" role="status"></div>
                             </button>
                         </div>
                     </form>

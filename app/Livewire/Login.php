@@ -29,8 +29,9 @@ class Login extends Component
             'password' => 'required',
         ]);
 
+        // sleep(2);
+
         if ($validator->fails()) {
-            sleep(2);
             return redirect()->back()->with('errors', $validator->errors());
         }
 

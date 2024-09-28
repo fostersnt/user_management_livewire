@@ -5,6 +5,7 @@ namespace App\Livewire\User;
 use App\Models\User as ModelsUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -78,19 +79,23 @@ class User extends Component
     public function update()
     {
 
-        $validator = $this->validate([
+        $validator = Validator::make($this->all(), [
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
         ]);
+
+        if ($validator->fails()) {
+            return back()->with('errors', $validator->errors());
+        }
 
         $user = ModelsUser::query()->find($this->userIdToEdit);
 
-        $user->update($validator);
-
-        Log::info("\nUSER DATA: " . json_encode($user));
+        $user->update([
+            'name' => $this->name,
+            'email' => $this->email,
+        ]);
 
         $this->reset();
-        // $this->refreshUsers();
 
         $this->dispatch('userUpdated');
 

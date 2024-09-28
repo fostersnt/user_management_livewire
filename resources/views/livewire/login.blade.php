@@ -17,18 +17,18 @@
             @endif
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input wire:model='email' class="form-control {{ (Session::get('errors') != null && Session::get('errors')->first('email') != '') ? 'error-border' : '' }}" type="text"
+                <input wire:model='email' class="form-control {{ (Session::has('errors') && Session::get('errors')->first('email') != '') ? 'error-border' : '' }}" type="text"
                     id="email" name="email">
                 <span
-                    class="text-danger">{{ Session::get('errors') != null ? Session::get('errors')->first('email') : '' }}</span>
+                    class="text-danger">{{ Session::has('errors') ? Session::get('errors')->first('email') : '' }}</span>
 
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
-                <input wire:model='password' class="form-control {{ (Session::get('errors') != null && Session::get('errors')->first('password') != '') ? 'error-border' : '' }}"
+                <input wire:model='password' class="form-control {{ (Session::has('errors') && Session::get('errors')->first('password') != '') ? 'error-border' : '' }}"
                     type="password" id="password" name="password">
                 <span
-                    class="text-danger">{{ Session::get('errors') != null ? Session::get('errors')->first('password') : '' }}</span>
+                    class="text-danger">{{ Session::has('errors') ? Session::get('errors')->first('password') : '' }}</span>
             </div>
             <button class="btn btn-outline-primary w-100 mt-3" type="submit">
                 <span wire:loading.remove>Login</span>
