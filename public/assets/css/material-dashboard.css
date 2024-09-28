@@ -21615,6 +21615,7 @@ fieldset:disabled .btn {
 }
 
 .dark-version .bg-gradient-dark {
+  /* background-color: #f8f9fa !important; */
   background-image: linear-gradient(195deg, #323a54, #1a2035) !important;
 }
 
@@ -22769,7 +22770,8 @@ label,
 }
 
 .bg-gradient-dark {
-  background-image: linear-gradient(195deg, #42424a 0%, #191919 100%);
+    background-color: #f8f9fa !important;
+  /* background-image: linear-gradient(195deg, #42424a 0%, #191919 100%); */
 }
 
 .bg-gradient-faded-primary {

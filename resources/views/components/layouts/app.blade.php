@@ -81,12 +81,13 @@
         }
 
         .modal-content {
-            background-color: #3b3b42 !important;
+            /* background-color: #3b3b42 !important; */
+            background-color: #f8f9fa !important;
             border-radius: 0px !important;
         }
 
         .modal-content label {
-            color: #fff !important;
+            /* color: #fff !important; */
         }
 
         .form-control:focus {
