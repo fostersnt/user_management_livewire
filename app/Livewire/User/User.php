@@ -141,7 +141,7 @@ class User extends Component
         }
     }
 
-    #[Title('Add User')]
+    #[Title('Users')]
     public function render()
     {
         $users = ModelsUser::query()->where('email', '<>', auth()->user()->email)->orderBy('created_at', 'desc')->paginate(10);
