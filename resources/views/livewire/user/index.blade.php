@@ -135,7 +135,7 @@
                 <div class="modal-body">
                     <form wire:submit.prevent='delete()'>
                         <div class="d-flex justify-content-center">
-                            <span>Do you want to delete this user?</span>
+                            <span>Do you want to delete {{$currentUser->name ?? '' }}</span>
                         </div>
                         <div class="d-flex justify-content-end mt-5">
                             <button type="button" class="btn btn-secondary mx-2"

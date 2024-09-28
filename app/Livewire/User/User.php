@@ -23,7 +23,7 @@ class User extends Component
     public ModelsUser $allUsers;
     public $isLoading = false;
 
-    // public $users;
+    public $currentUser;
 
     public function mount()
     {
@@ -67,6 +67,8 @@ class User extends Component
 
         $user = ModelsUser::query()->find($user_id);
 
+        $this->currentUser = $user;
+
         if ($user) {
             $this->userIdToEdit = $user->id;
             $this->name = $user->name;
@@ -90,6 +92,8 @@ class User extends Component
 
         $user = ModelsUser::query()->find($this->userIdToEdit);
 
+        $this->currentUser = $user;
+
         $user->update([
             'name' => $this->name,
             'email' => $this->email,
@@ -105,9 +109,9 @@ class User extends Component
     public function confirmDelete($user_id)
     {
         $user = ModelsUser::query()->find($user_id);
-        if ($user) {
-            $this->userIdToDelete = $user->id;
-        }
+
+        $this->currentUser = $user;
+
         $this->dispatch('userDeleteConfirmed');
     }
 
@@ -115,11 +119,9 @@ class User extends Component
     {
         try {
 
-            $user = ModelsUser::query()->find($this->userIdToDelete);
+            if ($this->currentUser) {
 
-            if ($user) {
-
-                $user->delete();
+                $this->currentUser->delete();
 
                 $this->reset();
                 // $this->refreshUsers();
