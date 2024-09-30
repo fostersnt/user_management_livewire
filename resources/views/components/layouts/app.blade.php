@@ -51,6 +51,7 @@
             margin-right: 10px;
             /* border-radius: 50%; */
         }
+
         .toastify .toast-close {
             display: flex;
             justify-content: center;
@@ -92,6 +93,18 @@
 
         .form-control:focus {
             background-color: #fff !important;
+        }
+
+        /* For Firefox */
+        * {
+            scrollbar-width: none;
+            /* Hide scrollbar */
+        }
+
+        /* For Webkit browsers */
+        *::-webkit-scrollbar {
+            display: none;
+            /* Hide scrollbar */
         }
     </style>
     @livewireStyles

@@ -42,7 +42,7 @@ class Login extends Component
 
         try {
             if (Auth::attempt($credentials)) {
-                return redirect()->route('users.index');
+                return redirect()->route('dashboard');
             } else {
                 return back()->with('error', 'Your credentials do not match any record');
             }

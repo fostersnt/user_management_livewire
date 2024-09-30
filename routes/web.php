@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Livewire\Dashboard;
 use App\Livewire\Login;
 use App\Livewire\User\User;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,7 @@ Route::get('login', Login::class)->name('login')->middleware('guest');
 Route::middleware('auth')
     ->prefix('dashboard')
     ->group(function () {
+        Route::get('/', Dashboard::class)->name('dashboard');
         Route::prefix('users')
             ->group(function () {
                 Route::get('/', User::class)->name('users.index');
