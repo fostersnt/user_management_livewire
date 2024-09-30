@@ -16,7 +16,7 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link text-dark " href="./pages/dashboard.html">
+                <a class="nav-link text-dark " href="/dashboard" wire:navigate>
 
                     <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>

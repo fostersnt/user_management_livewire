@@ -27,14 +27,8 @@ Route::middleware('auth')
     ->prefix('dashboard')
     ->group(function () {
         Route::get('/', Dashboard::class)->name('dashboard');
-        Route::prefix('users')
-            ->group(function () {
-                Route::get('/', User::class)->name('users.index');
-            });
+        Route::get('/users', User::class)->name('users.index');
     });
-
-
-
 
 Route::get('/', function () {
     return redirect()->route('login');
