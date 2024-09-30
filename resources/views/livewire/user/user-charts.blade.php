@@ -212,21 +212,24 @@
                     '2024 the US has 3,708 weapons compared to Russia’s 4,380.'
             },
             title: {
-                text: 'US and USSR nuclear stockpiles'
+                text: 'Gender of Users'
+            },
+            credits: {
+                enabled: false // Disable credits
             },
             subtitle: {
                 text: 'Source: <a href="https://fas.org/issues/nuclear-weapons/status-world-nuclear-forces/" ' +
-                    'target="_blank">FAS</a>'
+                    'target="_blank">Gender</a>'
             },
             xAxis: {
                 allowDecimals: false,
                 accessibility: {
-                    rangeDescription: 'Range: 1940 to 2024.'
+                    rangeDescription: 'Previous Month.'
                 }
             },
             yAxis: {
                 title: {
-                    text: 'Nuclear weapon states'
+                    text: 'Current Month'
                 }
             },
             tooltip: {
@@ -285,13 +288,16 @@
                 polar: true
             },
             title: {
-                text: 'Winter Olympic medals per existing country (TOP 5)',
-                align: 'left'
+                text: 'Ages of Users',
+                align: 'center'
+            },
+            credits: {
+                enabled: false // Disable credits
             },
             subtitle: {
                 text: 'Source: ' +
                     '<a href="https://en.wikipedia.org/wiki/All-time_Olympic_Games_medal_table"' +
-                    'target="_blank">Wikipedia</a>',
+                    'target="_blank">Users ages</a>',
                 align: 'left'
             },
             tooltip: {
