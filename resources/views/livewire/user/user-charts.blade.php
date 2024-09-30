@@ -20,7 +20,7 @@
                             customLabel = chart.options.chart.custom.label =
                                 chart.renderer.label(
                                     'Total<br/>' +
-                                    '<strong>2 877 820</strong>'
+                                    '<strong>{{$total_users}}</strong>'
                                 )
                                 .css({
                                     color: '#000',
@@ -50,19 +50,20 @@
                 }
             },
             title: {
-                text: '2023 Norway car registrations'
+                text: 'Registered Users'
             },
             credits: {
                 enabled: false // Disable credits
             },
             subtitle: {
-                text: 'Source: <a href="https://www.ssb.no/transport-og-reiseliv/faktaside/bil-og-transport">SSB</a>'
+                text: 'Active & In-active'
+                // text: 'Source: <a href="https://www.ssb.no/transport-og-reiseliv/faktaside/bil-og-transport">SSB</a>'
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.0f}%</b>'
             },
             legend: {
-                enabled: false
+                enabled: true
             },
             plotOptions: {
                 series: {
@@ -87,19 +88,19 @@
             series: [{
                 name: 'Registrations',
                 colorByPoint: true,
-                innerSize: '75%',
+                innerSize: '70%',
                 data: [{
-                    name: 'EV',
-                    y: 23.9
+                    name: 'Active',
+                    y: 50
                 }, {
-                    name: 'Hybrids',
-                    y: 12.6
+                    name: 'In-active',
+                    y: 12.0
                 }, {
-                    name: 'Diesel',
-                    y: 37.0
+                    name: 'Deleted',
+                    y: 30.0
                 }, {
-                    name: 'Petrol',
-                    y: 26.4
+                    name: 'Pending',
+                    y: 25.0
                 }]
             }]
         });
@@ -116,7 +117,7 @@
                 }
             },
             title: {
-                text: 'Number of confirmed COVID-19'
+                text: 'Monthly User registrations'
             },
             credits: {
                 enabled: false // Disable credits
