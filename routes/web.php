@@ -22,12 +22,14 @@ Route::get('login', Login::class)->name('login')->middleware('guest');
 
 
 // AUTH ROUTES
-Route::middleware('auth')->group(function () {
-    Route::prefix('users')
-        ->group(function () {
-            Route::get('/', User::class)->name('users.index');
-        });
-});
+Route::middleware('auth')
+    ->prefix('dashboard')
+    ->group(function () {
+        Route::prefix('users')
+            ->group(function () {
+                Route::get('/', User::class)->name('users.index');
+            });
+    });
 
 
 
