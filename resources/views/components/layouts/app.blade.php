@@ -282,6 +282,18 @@
 
 
 {{-- NEW --}}
+{{-- Highcharts --}}
+{{-- <script src="{{asset('assets/js/highcharts/highcharts.js')}}"></script>
+<script src="{{asset('assets/js/highcharts/cylinder.js')}}"></script>
+<script src="{{asset('assets/js/highcharts/highcharts-3d.js')}}"></script> --}}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+<script src="https://code.highcharts.com/modules/cylinder.js"></script>
+{{-- <script src="https://code.highcharts.com/modules/exporting.js"></script> --}}
+{{-- <script src="https://code.highcharts.com/modules/export-data.js"></script> --}}
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+{{-- Datatables --}}
 <script src="{{ asset('assets/datatables/js/dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/datatables/js/dataTables.buttons.min.js') }}"></script>
 <script src="{{ asset('assets/datatables/js/buttons.html5.min.js') }}"></script>
