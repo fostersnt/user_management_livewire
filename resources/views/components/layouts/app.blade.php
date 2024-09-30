@@ -282,10 +282,7 @@
 
 
 {{-- NEW --}}
-{{-- Highcharts --}}
-{{-- <script src="{{asset('assets/js/highcharts/highcharts.js')}}"></script>
-<script src="{{asset('assets/js/highcharts/cylinder.js')}}"></script>
-<script src="{{asset('assets/js/highcharts/highcharts-3d.js')}}"></script> --}}
+
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/highcharts-3d.js"></script>
 <script src="https://code.highcharts.com/modules/cylinder.js"></script>
